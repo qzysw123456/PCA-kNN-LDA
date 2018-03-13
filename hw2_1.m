@@ -1,26 +1,21 @@
-Valid = load('SPECT_valid.txt');
-Train = load('SPECT_train.txt');
+p = [0.6 0.1;0.6 0.9];
 
-[n,m] = size(Train);
-tag = Train(:,m);
-X1 = Train(tag == 1,1:m-1);
-X2 = Train(tag == 2,1:m-1);
+c1 = 0.8;
+c2 = 0.2;
 
-mu1 = mean(X1);
-mu2 = mean(X2);
+C1 = [0.06 0.54; 0.04 0.36];
+C2 = [0.54 0.06; 0.36 0.04];
 
-sigma = [-5:5];
-p1 = 1./(1+exp(sigma));
-p2 = 1-p1;
+P = c1*C1 + c2*C2;
 
-Err = zeros(1,11);
-for i = 1 : n
-    x = Valid(i,:);
-    f = 0;
-    for j = 1 : m-1
-        f = f + (1-x(j))*log(mu1(j)) + x(j)*log(1-mu1(j));
-        f = f - (1-x(j))*log(mu2(j)) - x(j)*log(1-mu2(j));
+for i = 1: 2
+    for j = 1 : 2
+        C2(i,j)*c2/P(i,j)
     end
-    f = f + log(p1) - log(p2);
+end
+for i = 1: 2
+    for j = 1 : 2
+        C1(i,j)*c1/P(i,j)
+    end
 end
 
