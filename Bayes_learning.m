@@ -41,4 +41,5 @@ end
 [dummy pos] = min(err);
 pc1 = Pclass1(pos);
 pc2 = Pclass2(pos);
+sprintf('error rate of each prior %0.5f %0.5f %0.5f %0.5f %0.5f %0.5f %0.5f %0.5f %0.5f %0.5f %0.5f\n',err/n)
 end
